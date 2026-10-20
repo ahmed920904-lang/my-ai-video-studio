@@ -1,8 +1,11 @@
+import PIL.Image
+if not hasattr(PIL.Image, 'ANTIALIAS'):
+    PIL.Image.ANTIALIAS = PIL.Image.Resampling.LANCZOS
+
 import streamlit as st
 from gtts import gTTS
 import os
 import requests
-import urllib.parse
 from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips
 from PIL import Image
 from io import BytesIO
@@ -25,7 +28,7 @@ if st.button("توليد الفيديو الكامل"):
             tts = gTTS(text=script, lang='ar')
             tts.save(audio_file)
             
-            # 3. جلب 3 صور من الإنترنت (كصور عشوائية للتجربة)
+            # 3. جلب 3 صور من الإنترنت
             image_urls = [
                 "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800", 
                 "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800", 
